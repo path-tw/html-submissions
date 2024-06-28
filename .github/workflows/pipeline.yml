@@ -1,0 +1,25 @@
+name: qa_journey_tests
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  pull-latest-code:
+    name: Pull latest code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4.1.1
+      - name: Apply MongoDB terraform scripts in dev-account
+        env:
+          ASSIGNMENT_NAME: my-cart
+          ASSIGNMENT_ID: 622206
+        run: |
+          rm -rf "$ASSIGNMENT_NAME-submissions"
+          gh classroom clone student-repos -a $ASSIGNMENT_ID
