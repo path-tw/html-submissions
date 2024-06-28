@@ -27,7 +27,4 @@ jobs:
           ASSIGNMENT_ID: 622206
           GH_TOKEN: ${{ secrets.token }}
         working-directory: ./
-        run: |
-          rm -rf "$ASSIGNMENT_NAME-submissions"
-          gh classroom clone student-repos -a $ASSIGNMENT_ID
-          popd > /dev/null
+        run: scripts/pull-students-latest-code.sh
