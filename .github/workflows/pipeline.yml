@@ -17,12 +17,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4.1.1
       - name: Install github classroom extension
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh extension install github/gh-classroom
       - name: Pull students latest code
         env:
           ASSIGNMENT_NAME: my-cart
           ASSIGNMENT_ID: 622206
+          GH_TOKEN: ${{ github.token }}
         run: |
           rm -rf "$ASSIGNMENT_NAME-submissions"
           gh classroom clone student-repos -a $ASSIGNMENT_ID
