@@ -26,9 +26,8 @@ jobs:
           ASSIGNMENT_NAME: my-cart
           ASSIGNMENT_ID: 622206
           GH_TOKEN: ${{ secrets.token }}
+        working-directory: ./
         run: |
-          PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../"
-          pushd "${PROJECT_DIR}" > /dev/null
           rm -rf "$ASSIGNMENT_NAME-submissions"
           gh classroom clone student-repos -a $ASSIGNMENT_ID
           popd > /dev/null
