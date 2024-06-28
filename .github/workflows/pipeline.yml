@@ -1,4 +1,4 @@
-name: qa_journey_tests
+name: pull latest code
 
 on:
   workflow_dispatch:
@@ -16,7 +16,10 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4.1.1
-      - name: Apply MongoDB terraform scripts in dev-account
+      - name: Install github classroom extension
+        run: |
+          gh extension install github/gh-classroom
+      - name: Pull students latest code
         env:
           ASSIGNMENT_NAME: my-cart
           ASSIGNMENT_ID: 622206
