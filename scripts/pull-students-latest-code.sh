@@ -8,6 +8,7 @@ function main() {
 }
 
 PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../"
+echo $PROJECT_DIR
 pushd "${PROJECT_DIR}" > /dev/null
   main
 popd > /dev/null
