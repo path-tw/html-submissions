@@ -4,6 +4,10 @@ function main() {
   pwd
   rm -rf "$ASSIGNMENT_NAME-submissions"
   gh classroom clone student-repos -a $ASSIGNMENT_ID
+  repos=($(ls))
+  for repo in $repos; do                                             ok
+    rm -rf $repo/.git
+  done
   git config --global user.name "polling-students-repos"
   git config --global user.email "polling-repos@gmail.com"
   git add .
