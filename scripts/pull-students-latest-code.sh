@@ -5,8 +5,7 @@ function main() {
   rm -rf "$ASSIGNMENT_NAME-submissions"
   gh classroom clone student-repos -a $ASSIGNMENT_ID
   repos=$(ls $ASSIGNMENT_NAME-submissions)
-  echo $repos --------------
-  for repo in $repos; do                                             ok
+  for repo in $repos; do
     rm -rf $repo/.git
   done
   git config --global user.name "polling-students-repos"
