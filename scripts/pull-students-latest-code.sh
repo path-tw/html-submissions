@@ -4,7 +4,7 @@ function main() {
   pwd
   rm -rf "$ASSIGNMENT_NAME-submissions"
   gh classroom clone student-repos -a $ASSIGNMENT_ID
-  repos=($(ls))
+  repos=$(ls $ASSIGNMENT_NAME-submissions)
   echo $repos --------------
   for repo in $repos; do                                             ok
     rm -rf $repo/.git
