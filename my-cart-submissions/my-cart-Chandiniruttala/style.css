@@ -1,0 +1,64 @@
+.text
+{
+background:linear-gradient(rgb(168, 24, 101),rgb(201, 10, 10));
+color:white;
+
+background-repeat: no-repeat;
+}
+.text1
+{
+font-family:system-ni,sans-serif;
+}
+#text2
+{
+font-family:system-ni,sans-serif;
+font-size:40px;
+}
+p
+{
+color:black;
+font-weight: 600;
+}
+
+figure
+{
+color:rgb(207, 207, 117);
+}
+img
+{
+ height: 400px;
+ width : 400px;
+ padding: 20px;
+ border: 5px rgb(34, 4, 62) dotted;
+ border-radius: 20%;
+ box-sizing: border-box;
+}
+#a
+{
+color: blue;
+background-color: aqua;
+border-radius: 40%;
+padding: 5px;
+}
+#text3
+{
+    text-decoration:underline;
+}
+*
+{
+text-align: center;
+}
+#line
+{
+ border-bottom: 1.8px solid black;   
+}
+#break
+{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.text5
+{
+    color: black;
+   font-weight: 1000;
+}
