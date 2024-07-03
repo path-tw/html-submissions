@@ -2,6 +2,8 @@ set -e -o pipefail
 
 function main() {
   pwd
+  mkdir -p submissions
+  cd submissions
   rm -rf "$ASSIGNMENT_NAME-submissions"
   gh classroom clone student-repos -a $ASSIGNMENT_ID
   repos=$(ls $ASSIGNMENT_NAME-submissions)
