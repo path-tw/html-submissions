@@ -12,6 +12,7 @@ function main() {
 #    echo "Removing git from $repo"
 #    rm -rf $repo/.git
 #  done
+  mkdir -p "$ASSIGNMENT_NAME-submissions"
   cd "$ASSIGNMENT_NAME-submissions"
   gh repo clone path-tw/my-cart-naveen-kumar-vadla
   cd my-cart-naveen-kumar-vadla
