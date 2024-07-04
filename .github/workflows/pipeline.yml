@@ -39,7 +39,7 @@ jobs:
   publish-latest-code:
     name: Publish latest code
     runs-on: ubuntu-latest
-    needs: upload-latest-code
+    needs: pull-and-upload-latest-code
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4.1.1
