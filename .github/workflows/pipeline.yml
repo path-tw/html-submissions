@@ -35,7 +35,7 @@ jobs:
           ACTIONS_STEP_DEBUG: true
         with:
           name: html-submissions
-          path: submissions
+          path: submissions/**
 
   publish-latest-code:
     name: Publish latest code
