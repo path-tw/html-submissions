@@ -30,7 +30,7 @@ jobs:
         working-directory: ./
         run: scripts/pull-students-latest-code.sh
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3.0.1
         env:
           ACTIONS_STEP_DEBUG: true
         with:
