@@ -29,10 +29,16 @@ jobs:
         working-directory: ./
         run: scripts/pull-students-latest-code.sh
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
+        env:
+          ACTIONS_STEP_DEBUG: true
         with:
-          name: github-pages
+          name: html-submissions
           path: submissions
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        env:
+          ACTIONS_STEP_DEBUG: true
+        with:
+          artifact_name: html-submissions
