@@ -24,8 +24,6 @@ jobs:
           gh extension install github/gh-classroom
       - name: Pull students latest code
         env:
-          ASSIGNMENT_NAME: my-cart
-          ASSIGNMENT_ID: 622206
           GH_TOKEN: ${{ secrets.token }}
         working-directory: ./
         run: scripts/pull-students-latest-code.sh
