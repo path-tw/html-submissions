@@ -36,7 +36,7 @@ function pullAssignmentRepos() {
   for repo in $repos; do
     echo "Removing git from $repo"
     studentsList+="<li><a href=\"./${repo}\">${repo}</a></li>"
-    rm -rf $repo/.git
+    rm -rf .git
   done
   code=$htmlStart$studentsList$htmlEnd
   echo $code > index.html
