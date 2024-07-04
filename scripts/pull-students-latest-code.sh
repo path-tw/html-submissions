@@ -31,14 +31,16 @@ function pullAssignmentRepos() {
   rm -rf "$ASSIGNMENT_NAME-submissions"
   gh classroom clone student-repos -a $ASSIGNMENT_ID
 
-  repos=$(ls $ASSIGNMENT_NAME-submissions)
+  pushd "$ASSIGNMENT_NAME-submissions"
+  repos=$(ls)
   for repo in $repos; do
     echo "Removing git from $repo"
     studentsList+="<li><a href=\"./${repo}\">${repo}</a></li>"
     rm -rf $repo/.git
   done
   code=$htmlStart$studentsList$htmlEnd
-  echo $code > $ASSIGNMENT_NAME-submissions/index.html
+  echo $code > index.html
+  popd
   popd
 }
 
