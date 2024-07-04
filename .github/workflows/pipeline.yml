@@ -1,0 +1,38 @@
+name: pull latest code
+
+on:
+  workflow_dispatch:
+#  schedule:
+#    - cron: '*/5 * * * *'
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  pull-latest-code:
+    name: Pull latest code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4.1.1
+      - name: Install github classroom extension
+        env:
+          GH_TOKEN: ${{ secrets.token }}
+        run: |
+          gh extension install github/gh-classroom
+      - name: Pull students latest code
+        env:
+          ASSIGNMENT_NAME: my-cart
+          ASSIGNMENT_ID: 622206
+          GH_TOKEN: ${{ secrets.token }}
+        working-directory: ./
+        run: scripts/pull-students-latest-code.sh
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: html-submissions
+          path: submissions
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
