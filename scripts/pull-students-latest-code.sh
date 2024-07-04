@@ -4,7 +4,7 @@ function pullAssignmentRepos() {
   ASSIGNMENT_NAME="$1"
   ASSIGNMENT_ID="$2"
 
-  cd submissions
+  pushd submissions
   rm -rf "$ASSIGNMENT_NAME-submissions"
   gh classroom clone student-repos -a $ASSIGNMENT_ID
 
@@ -13,6 +13,7 @@ function pullAssignmentRepos() {
     echo "Removing git from $repo"
     rm -rf $repo/.git
   done
+  popd
 }
 
 rm -rf .git
