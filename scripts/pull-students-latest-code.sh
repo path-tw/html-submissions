@@ -9,6 +9,7 @@ function main() {
   gh classroom clone student-repos -a $ASSIGNMENT_ID
   repos=$(ls $ASSIGNMENT_NAME-submissions)
   for repo in $repos; do
+    echo "Removing git from $repo"
     rm -rf $repo/.git
   done
 }
