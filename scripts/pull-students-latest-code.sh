@@ -15,7 +15,7 @@ htmlStart="<!DOCTYPE html>
       }
 
       a:hover {
-        text-decoration: underline #f00;
+        color: #f00;
       }
     </style>
   </head>
@@ -34,7 +34,7 @@ function pullAssignmentRepos() {
   repos=$(ls $ASSIGNMENT_NAME-submissions)
   for repo in $repos; do
     echo "Removing git from $repo"
-    studentsList+="<li><a href=\"$ASSIGNMENT_NAME-submissions/${repo}\">${repo}</a></li>"
+    studentsList+="<li><a href=\"./${repo}\">${repo}</a></li>"
     rm -rf $repo/.git
   done
   code=$htmlStart$studentsList$htmlEnd
