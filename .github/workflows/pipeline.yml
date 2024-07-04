@@ -1,4 +1,4 @@
-name: pull latest code
+name: Pull & Publish students html submissions
 
 on:
   workflow_dispatch:
@@ -28,6 +28,12 @@ jobs:
           GH_TOKEN: ${{ secrets.token }}
         working-directory: ./
         run: scripts/pull-students-latest-code.sh
+
+  upload-latest-code:
+    name: Upload latest code
+    runs-on: ubuntu-latest
+    needs: pull-latest-code
+    steps:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         env:
@@ -35,6 +41,12 @@ jobs:
         with:
           name: html-submissions
           path: submissions
+
+  publish-latest-code:
+    name: Publish latest code
+    runs-on: ubuntu-latest
+    needs: upload-latest-code
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
