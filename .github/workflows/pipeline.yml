@@ -8,7 +8,7 @@ on:
 permissions:
   id-token: write
   contents: write
-  repository-projects: write
+  pages: write
 
 jobs:
   pull-and-upload-latest-code:
