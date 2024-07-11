@@ -47,3 +47,4 @@ function pullAssignmentRepos() {
 rm -rf .git
 pullAssignmentRepos "my-cart" 622206
 pullAssignmentRepos "my-clone" 624979
+pullAssignmentRepos "css-flex" 627049
