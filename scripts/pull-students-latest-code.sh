@@ -29,8 +29,6 @@ htmlStart="<!DOCTYPE html>
 htmlEnd="</ol></body></html>"
 
 function getLastUpdatedTime {
-  repo=$1
-  pushd $repo
   # Get the timestamp of the latest commit
   commit_timestamp=$(git log -1 --format=%cd --date=iso)
 
@@ -41,7 +39,7 @@ function getLastUpdatedTime {
   current_epoch=$(date +%s)
 
   # Calculate the difference in seconds
-  difference=$((current_epoch - commit_epoch))
+  difference=$(((current_epoch - commit_epoch)))
 
   # Convert the difference to human-readable format (days, hours, minutes, seconds)
   days=$((difference / 86400))
@@ -49,7 +47,7 @@ function getLastUpdatedTime {
   minutes=$(( (difference % 3600) / 60 ))
   seconds=$(( difference % 60 ))
 
-  message="Updated:"
+  message=""
 
   if [ "$days" -gt 0 ]; then
     message="${message} ${days} days,"
@@ -66,9 +64,8 @@ function getLastUpdatedTime {
   if [ "$seconds" -gt 0 ]; then
     message="${message} ${seconds} seconds"
   fi
-  popd
 
-  echo "$message ago"
+  echo $message
 }
 
 function pullAssignmentRepos() {
@@ -76,23 +73,24 @@ function pullAssignmentRepos() {
   ASSIGNMENT_ID="$2"
   studentsList=""
 
-  pushd submissions
+  pushd submissions > /dev/null
   rm -rf "$ASSIGNMENT_NAME-submissions"
   gh classroom clone student-repos -a $ASSIGNMENT_ID
 
-  pushd "$ASSIGNMENT_NAME-submissions"
+  pushd "$ASSIGNMENT_NAME-submissions" > /dev/null
   repos=$(ls)
   for repo in $repos; do
-    echo "Removing git from $repo"
+    pushd $repo > /dev/null
     lastUpdatedTime=$(getLastUpdatedTime "$repo")
-    # studentsList+="<li><a href=\"./${repo}\">${repo}</a><span>${lastUpdatedTime}</span></li>"
-    studentsList+="<li><a href=\"./${repo}\">${repo}</a></li>"
+    studentsList+="<li><a href=\"./\">${repo}</a><span>(Submitted: ${lastUpdatedTime} ago)</span></li>"
+    echo "Removing git from $repo"
     rm -rf .git
+    popd > /dev/null
   done
   code=$htmlStart$studentsList$htmlEnd
   echo $code > index.html
-  popd
-  popd
+  popd > /dev/null
+  popd > /dev/null
 }
 
 rm -rf .git
