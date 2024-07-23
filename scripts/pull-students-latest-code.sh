@@ -29,6 +29,8 @@ htmlStart="<!DOCTYPE html>
 htmlEnd="</ol></body></html>"
 
 function getLastUpdatedTime {
+  repo=$1
+  pushd $repo
   # Get the timestamp of the latest commit
   commit_timestamp=$(git log -1 --format=%cd --date=iso)
 
@@ -64,6 +66,7 @@ function getLastUpdatedTime {
   if [ "$seconds" -gt 0 ]; then
     message="${message} ${seconds} seconds"
   fi
+  popd
 
   echo "$message ago"
 }
@@ -81,7 +84,7 @@ function pullAssignmentRepos() {
   repos=$(ls)
   for repo in $repos; do
     echo "Removing git from $repo"
-    lastUpdatedTime=$(getLastUpdatedTime)
+    lastUpdatedTime=$(getLastUpdatedTime "$repo")
     studentsList+="<li><a href=\"./${repo}\">${repo}</a><span>${lastUpdatedTime}</span></li>"
     rm -rf .git
   done
