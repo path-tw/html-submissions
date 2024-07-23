@@ -82,7 +82,7 @@ function pullAssignmentRepos() {
   for repo in $repos; do
     pushd $repo > /dev/null
     lastUpdatedTime=$(getLastUpdatedTime "$repo")
-    studentsList+="<li><a href=\"./\">${repo}</a><span>(Submitted: ${lastUpdatedTime} ago)</span></li>"
+    studentsList+="<li><a href=\"./${repo}\">${repo}</a><span>(Submitted: ${lastUpdatedTime} ago)</span></li>"
     echo "Removing git from $repo"
     rm -rf .git
     popd > /dev/null
