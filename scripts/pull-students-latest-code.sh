@@ -17,11 +17,57 @@ htmlStart="<!DOCTYPE html>
       a:hover {
         color: #f00;
       }
+
+      span {
+        margin-left: 10px;
+        color: teal;
+      }
     </style>
   </head>
   <body>
     <ol>"
 htmlEnd="</ol></body></html>"
+
+function getLastUpdatedTime {
+  # Get the timestamp of the latest commit
+  commit_timestamp=$(git log -1 --format=%cd --date=iso)
+
+  # Convert commit timestamp to epoch time
+  commit_epoch=$(date -d "$commit_timestamp" +%s)
+
+  # Get the current time in epoch
+  current_epoch=$(date +%s)
+
+  # Calculate the difference in seconds
+  difference=$((current_epoch - commit_epoch))
+
+  # Convert the difference to human-readable format (days, hours, minutes, seconds)
+  days=$((difference / 86400))
+  hours=$(( (difference % 86400) / 3600 ))
+  minutes=$(( (difference % 3600) / 60 ))
+  seconds=$(( difference % 60 ))
+
+  message="Updated:"
+
+  if [ "$days" -gt 0 ]; then
+    message="${message} ${days} days,"
+  fi
+
+  if [ "$hours" -gt 0 ]; then
+    message="${message} ${hours} hours,"
+  fi
+
+  if [ "$minutes" -gt 0 ]; then
+    message="${message} ${minutes} minutes,"
+  fi
+
+  if [ "$seconds" -gt 0 ]; then
+    message="${message} ${seconds} seconds"
+  fi
+
+  echo "$message ago"
+}
+
 function pullAssignmentRepos() {
   ASSIGNMENT_NAME="$1"
   ASSIGNMENT_ID="$2"
@@ -35,7 +81,8 @@ function pullAssignmentRepos() {
   repos=$(ls)
   for repo in $repos; do
     echo "Removing git from $repo"
-    studentsList+="<li><a href=\"./${repo}\">${repo}</a></li>"
+    lastUpdatedTime=$(getLastUpdatedTime)
+    studentsList+="<li><a href=\"./${repo}\">${repo}</a><span>${lastUpdatedTime}</span></li>"
     rm -rf .git
   done
   code=$htmlStart$studentsList$htmlEnd
