@@ -2,8 +2,8 @@ name: Pull & Publish students html submissions
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '*/20 * * * *'
+  # schedule:
+  # - cron: '*/20 * * * *'
 
 permissions:
   id-token: write
